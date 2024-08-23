@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func main() {
@@ -32,6 +33,12 @@ func main() {
 	}
 	output := out.String()
 
-	fmt.Println("Captured output: ")
-	fmt.Println(output)
+	lines := strings.Split(output, "\n")
+
+	for i := len(lines) - 1; i >= 0; i-- {
+		if strings.Contains(lines[i], "delegated prefix") {
+			fmt.Println("Matching line:", lines[i])
+			break
+		}
+	}
 }
