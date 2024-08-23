@@ -6,6 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Hey")
 	fmt.Println("Subnet", networkd.Subnet())
 }
