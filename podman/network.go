@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/containers/podman/v5/pkg/bindings"
-	"github.com/containers/podman/v5/pkg/bindings/images"
+	"github.com/containers/podman/v5/pkg/bindings/network"
 )
 
 func Networks() string {
@@ -19,17 +19,14 @@ func Networks() string {
 		os.Exit(1)
 	}
 
-	// List images
-	imageSummary, err := images.List(conn, nil)
+	// List networks
+	networks, err := network.List(conn, nil)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	var names []string
-	for _, i := range imageSummary {
-		names = append(names, i.RepoTags...)
+	for _, network := range networks {
+		fmt.Println(network.Name)
 	}
-	fmt.Println("Listing images...")
-	fmt.Println(names)
 	return "yeah"
 }
