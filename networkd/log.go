@@ -2,20 +2,23 @@ package networkd
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
+	"net"
 	"os"
 	"os/exec"
 	"regexp"
 	"strings"
 )
 
-func extract_subnet(line string) string {
+func extractSubnet(line string) (net.IP, *net.IPNet, error) {
 	re := regexp.MustCompile(`\b([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}/\d{1,3}\b|\b([0-9a-fA-F]{1,4}:){1,7}:/\d{1,3}\b|\b::([0-9a-fA-F]{1,4}:){1,6}[0-9a-fA-F]{1,4}/\d{1,3}\b|\b([0-9a-fA-F]{1,4}:){1,7}(:|:[0-9a-fA-F]{1,4}){0,6}/\d{1,3}\b`)
 	match := re.FindString(line)
 	// Regular expression to match an IPv6 CIDR notation
-	return match
+	return net.ParseCIDR(match)
 }
-func Subnet() string {
+
+func Subnet() (net.IP, *net.IPNet, error) {
 	cmd := exec.Command("journalctl", "-u", "systemd-networkd", "-p", "6", "-g", "DHCP: received delegated prefix")
 
 	var out bytes.Buffer
@@ -44,8 +47,8 @@ func Subnet() string {
 	for i := len(lines) - 1; i >= 0; i-- {
 		if strings.Contains(lines[i], "delegated prefix") {
 			fmt.Println("Matching line:", lines[i])
-			return extract_subnet(lines[i])
+			return extractSubnet(lines[i])
 		}
 	}
-	return ""
+	return nil, nil, errors.New("No matching lines in the networkd log")
 }
