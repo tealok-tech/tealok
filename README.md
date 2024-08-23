@@ -22,3 +22,19 @@ Run the binary as root so it can talk to the rootful service
 ```
 sudo ./main
 ```
+
+### Continuous Build-and-test
+
+Install [air]():
+
+```
+go install github.com/air-verse/air@latest
+```
+
+Run air
+
+```
+~/go/bin/air
+```
+
+This will run `go run` constantly
