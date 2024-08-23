@@ -8,6 +8,5 @@ import (
 
 func main() {
 	fmt.Println("Subnet", networkd.Subnet())
-	fmt.Println("Network", podman.Networks())
-
+	podman.Networks()
 }

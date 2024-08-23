@@ -9,9 +9,7 @@ import (
 	"github.com/containers/podman/v5/pkg/bindings/network"
 )
 
-func Networks() string {
-	fmt.Println("Welcome to the Podman Go bindings tutorial")
-
+func Networks() {
 	// Connect to Podman socket
 	conn, err := bindings.NewConnection(context.Background(), "unix:///run/podman/podman.sock")
 	if err != nil {
@@ -26,7 +24,6 @@ func Networks() string {
 		os.Exit(1)
 	}
 	for _, network := range networks {
-		fmt.Println(network.Name)
+		fmt.Printf("Network %v at subnet %v", network.Name, network.Subnets[0])
 	}
-	return "yeah"
 }
