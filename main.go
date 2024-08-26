@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
+	"github.com/tealok-tech/tealok/log"
 	"github.com/tealok-tech/tealok/networkd"
 	"github.com/tealok-tech/tealok/podman"
 	"os"
 )
 
 func main() {
+	// Set up the structured log
+	log.Setup()
 	// Get the correct subnet from the log
 	_, subnet, err := networkd.Subnet()
 	if err != nil {
@@ -21,5 +24,5 @@ func main() {
 	if err != nil {
 		os.Exit(2)
 	}
-	fmt.Println("Network name:", containerNetwork.Name)
+	fmt.Println("Tealok network name:", containerNetwork.Name)
 }

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/tealok-tech/tealok/log"
+
 	"github.com/containers/common/libnetwork/types"
 	"github.com/containers/podman/v5/pkg/bindings"
 	"github.com/containers/podman/v5/pkg/bindings/network"
@@ -44,6 +46,7 @@ func CreateNetworkWithSubnet(conn context.Context, subnet net.IPNet) (*types.Net
 	if err != nil {
 		return nil, err
 	}
+	log.NetworkCreated(newNetwork.Name)
 	return &newNetwork, nil
 }
 
