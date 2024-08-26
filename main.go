@@ -17,7 +17,7 @@ func main() {
 	fmt.Println("Subnet should be", subnet.IP, subnet.Mask.String())
 
 	// Get or create a network with the correct subnet
-	containerNetwork, err := podman.EnsureNetworkWithSubnet(subnet)
+	containerNetwork, err := podman.EnsureNetworkWithSubnet(subnet.IP)
 	if err != nil {
 		os.Exit(2)
 	}
