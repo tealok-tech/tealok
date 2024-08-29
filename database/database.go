@@ -1,27 +1,27 @@
 package database
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 
-	_ "github.com/glebarez/go-sqlite"
-	//_ "github.com/golang-migrate/migrate/v4"
-	//_ "github.com/golang-migrate/migrate/v4/database/sqlite"
+	migrate "github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/source/go_bindata"
+
+	_ "github.com/golang-migrate/migrate/v4/database/sqlite"
+	"github.com/tealok-tech/tealok/database/migrations"
 )
 
 func Connect() {
 	fmt.Println("Connecting to database")
-	db, err := sql.Open("sqlite", "/var/lib/tealok/database.sqlite")
+	s := bindata.Resource(migrations.AssetNames(),
+		func(name string) ([]byte, error) {
+			return migrations.Asset(name)
+		})
+	d, err := bindata.WithInstance(s)
+	m, err := migrate.NewWithSourceInstance("go-bindata", d, "sqlite:///var/lib/tealok/database.sqlite")
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
-
-	var version string
-	row := db.QueryRow("select sqlite_version()")
-	err = row.Scan(&version)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("SQLite version:", version)
+	m.Up()
 }

@@ -38,3 +38,10 @@ Run air
 ```
 
 This will run `go run` constantly
+
+### Generate new database migration
+
+```
+cd database/migrations
+go-bindata -pkg migrations .
+```

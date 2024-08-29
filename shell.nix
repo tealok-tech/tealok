@@ -6,6 +6,7 @@ pkgs.mkShell {
     pkgs.pkg-config
     pkgs.gnupg
     pkgs.go
+    pkgs.go-bindata
     pkgs.gpgme
   ];
 }
