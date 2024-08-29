@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/tealok-tech/tealok/database"
 	"github.com/tealok-tech/tealok/log"
 	"github.com/tealok-tech/tealok/networkd"
 	"github.com/tealok-tech/tealok/podman"
@@ -11,6 +12,8 @@ import (
 func main() {
 	// Set up the structured log
 	log.Setup()
+	// Open the local database
+	database.Connect()
 	// Get the correct subnet from the log
 	_, subnet, err := networkd.Subnet()
 	if err != nil {
