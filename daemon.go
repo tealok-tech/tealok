@@ -6,6 +6,7 @@ import (
 	"github.com/tealok-tech/tealok/log"
 	"github.com/tealok-tech/tealok/networkd"
 	"github.com/tealok-tech/tealok/podman"
+	"github.com/tealok-tech/tealok/server"
 	"os"
 )
 
@@ -28,4 +29,8 @@ func main() {
 		os.Exit(2)
 	}
 	fmt.Println("Tealok network name:", containerNetwork.Name)
+
+	// Run the server portion
+	server.Run()
+
 }
