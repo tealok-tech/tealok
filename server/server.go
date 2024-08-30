@@ -8,32 +8,22 @@ import (
 	"net/rpc"
 )
 
-type Args struct {
-	A, B int
+type AddArgs struct {
+	Name string
 }
 
-type Quotient struct {
-	Quo, Rem int
-}
+type Container int
 
-type Arith int
-
-func (t *Arith) Multiply(args *Args, reply *int) error {
-	*reply = args.A * args.B
-	return nil
-}
-
-func (t *Arith) Divide(args *Args, quo *Quotient) error {
-	if args.B == 0 {
-		return errors.New("divide by zero")
+func (t *Container) Add(args *AddArgs, reply *int) error {
+	if args.Name == "" {
+		return errors.New("Empty name")
 	}
-	quo.Quo = args.A / args.B
-	quo.Rem = args.A % args.B
+	log.Println("Adding", args.Name)
 	return nil
 }
 
 func Run() {
-	arith := new(Arith)
+	arith := new(Container)
 	rpc.Register(arith)
 	rpc.HandleHTTP()
 	l, err := net.Listen("tcp", ":1050")
