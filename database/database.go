@@ -43,3 +43,8 @@ func Connect() (*sql.DB, error) {
 	log.Println("SQLite version:", version)
 	return db, nil
 }
+
+func AddContainer(db *sql.DB, name string) error {
+	log.Println("Prentend the DB added", name)
+	return nil
+}

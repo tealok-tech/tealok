@@ -1,7 +1,9 @@
 package server
 
 import (
+	"database/sql"
 	"errors"
+	"github.com/tealok-tech/tealok/database"
 	"log"
 	"net"
 	"net/http"
@@ -12,19 +14,24 @@ type AddArgs struct {
 	Name string
 }
 
-type Container int
+type Server struct {
+	DB *sql.DB
+}
 
-func (t *Container) Add(args *AddArgs, reply *int) error {
+func (s *Server) Add(args *AddArgs, reply *int) error {
 	if args.Name == "" {
 		return errors.New("Empty name")
 	}
 	log.Println("Adding", args.Name)
+
+	database.AddContainer(s.DB, args.Name)
 	return nil
 }
 
-func Run() {
-	arith := new(Container)
-	rpc.Register(arith)
+func Run(db *sql.DB) {
+	server := new(Server)
+
+	rpc.Register(server)
 	rpc.HandleHTTP()
 	l, err := net.Listen("tcp", ":1050")
 	if err != nil {

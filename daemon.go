@@ -36,6 +36,5 @@ func main() {
 	fmt.Println("Tealok network name:", containerNetwork.Name)
 
 	// Run the server portion
-	server.Run()
-
+	server.Run(db)
 }

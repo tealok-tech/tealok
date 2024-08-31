@@ -44,7 +44,7 @@ func add() {
 
 	args := &server.AddArgs{*name}
 	var reply int
-	err = client.Call("Container.Add", args, &reply)
+	err = client.Call("Server.Add", args, &reply)
 	if err != nil {
 		log.Fatal("arith error:", err)
 		os.Exit(2)
