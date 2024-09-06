@@ -27,3 +27,6 @@ go.work.sum
 # Generated sqlc source code
 database/sqlc/procedures
 database/migrations/bindata.go
+
+# Build output
+tmp/
