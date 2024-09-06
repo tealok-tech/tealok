@@ -26,7 +26,7 @@ func Connect() (*sql.DB, error) {
 			return migrations.Asset(name)
 		})
 	d, err := bindata.WithInstance(s)
-	m, err := migrate.NewWithSourceInstance("go-bindata", d, "sqlite://"+DB_FILE)
+	m, err := migrate.NewWithSourceInstance("go-bindata", d, "sqlite3://"+DB_FILE)
 	if err != nil {
 		return nil, err
 	}
