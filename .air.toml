@@ -5,7 +5,7 @@ tmp_dir = "tmp"
 [build]
   args_bin = []
   bin = "./tmp/daemon"
-  cmd = "go build -o ./tmp/tealok-daemon daemon.go;go build -o ./tmp/tealok-client client.go"
+  cmd = "./build.sh"
   delay = 1000
   exclude_dir = ["assets", "tmp", "vendor", "testdata"]
   exclude_file = []
