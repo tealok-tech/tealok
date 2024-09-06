@@ -3,10 +3,12 @@
 pkgs.mkShell {
   buildInputs = [
     pkgs.btrfs-progs
-    pkgs.pkg-config
     pkgs.gnupg
     pkgs.go
     pkgs.go-bindata
+    pkgs.go-migrate
     pkgs.gpgme
+    pkgs.pkg-config
+    pkgs.sqlc
   ];
 }
