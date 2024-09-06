@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 	"log"
 	"time"
@@ -58,6 +59,9 @@ func Connect() (*sql.DB, error) {
 var ddl string
 
 func AddContainer(db *sql.DB, name string) error {
+	if db == nil {
+		return errors.New("Nil database connection")
+	}
 	ctx := context.Background()
 	queries := procedures.New(db)
 	if _, err := db.ExecContext(ctx, ddl); err != nil {

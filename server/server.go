@@ -24,12 +24,16 @@ func (s *Server) Add(args *AddArgs, reply *int) error {
 	}
 	log.Println("Adding", args.Name)
 
-	database.AddContainer(s.DB, args.Name)
+	err := database.AddContainer(s.DB, args.Name)
+	if err != nil {
+		log.Fatal("Unable to add container: " + err.Error())
+	}
 	return nil
 }
 
 func Run(db *sql.DB) {
 	server := new(Server)
+	server.DB = db
 
 	rpc.Register(server)
 	rpc.HandleHTTP()
