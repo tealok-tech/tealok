@@ -2,10 +2,10 @@ CREATE TABLE image (
 	id INTEGER PRIMARY KEY,
 	created_at TEXT NOT NULL,
 	deleted_at TEXT,
-	url TEXT NOT NULL,
+	url TEXT NOT NULL
 );
 
-CREATE TABLE containers (
+CREATE TABLE container (
 	id INTEGER PRIMARY KEY,
 	created_at TEXT NOT NULL,
 	deleted_at TEXT,
@@ -14,7 +14,7 @@ CREATE TABLE containers (
 	FOREIGN KEY (image_id)
 		REFERENCES image (id)
 			ON DELETE CASCADE
-			ON UPDATE NO ACTION,
+			ON UPDATE NO ACTION
 );
 
 CREATE TABLE exposure (
@@ -25,12 +25,11 @@ CREATE TABLE exposure (
 	created_at TEXT NOT NULL,
 	deleted_at TEXT,
 	host_port INTEGER,
-	protocol TEXT CHECK( protocol IN ('tcp', 'udp') NOT NULL,
+	protocol TEXT CHECK( protocol IN ('tcp', 'udp') NOT NULL ),
 	FOREIGN KEY (container_id)
-		REFERENCES containers (id)
+		REFERENCES container (id)
 			ON DELETE CASCADE
-			ON UPDATE NO ACTION,
-	);
+			ON UPDATE NO ACTION
 );
 
 CREATE TABLE environment_value (
@@ -40,13 +39,11 @@ CREATE TABLE environment_value (
 	deleted_at TEXT,
 	key TEXT NOT NULL,
 	value TEXT NOT NULL,
-	created_at TEXT NOT NULL,
-	deleted_at TEXT,
 	FOREIGN KEY (container_id)
 		REFERENCES containers (id)
 			ON DELETE CASCADE
-			ON UPDATE NO ACTION,
-	);
+			ON UPDATE NO ACTION
+);
 
 CREATE TABLE mount (
 	id INTEGER PRIMARY KEY,
@@ -58,6 +55,5 @@ CREATE TABLE mount (
 	FOREIGN KEY (container_id)
 		REFERENCES containers (id)
 			ON DELETE CASCADE
-			ON UPDATE NO ACTION,
-	);
-)
+			ON UPDATE NO ACTION
+);
