@@ -72,7 +72,7 @@ func AddContainer(db *sql.DB, name string) error {
 	currentTime := time.Now().UTC()
 
 	// Format it as a string suitable for SQLite (ISO 8601 format)
-	formattedTime := currentTime.Format("2006-01-02 15:04:05")
+	formattedTime := currentTime.Format(time.RFC3339)
 
 	// Print the formatted time
 	fmt.Println("Formatted Time:", formattedTime)
