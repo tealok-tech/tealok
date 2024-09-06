@@ -10,5 +10,6 @@ pkgs.mkShell {
     pkgs.gpgme
     pkgs.pkg-config
     pkgs.sqlc
+    pkgs.sqlite-interactive
   ];
 }
