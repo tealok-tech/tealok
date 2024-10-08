@@ -69,3 +69,35 @@ This will run `go run` constantly
 cd database/migrations
 go-bindata -pkg migrations .
 ```
+
+## FAQ
+
+### Are you serious?
+
+Yes.
+
+### How much funding do you have?
+
+Only what we've put up from out personal savings.
+
+### So you're bootstrapping.
+
+Yes. Also, not a question.
+
+### Are you stupid? Spending other people's money is awesome.
+
+Probably.
+
+Spending other people's money also makes you beholden to them. We fight for the users.
+
+### Can this possible work?
+
+Absolutely, if we work together and keep at it. Archimedes said with a large enough Go codebase we can move the whole world. He was smart.
+
+### How will you make money?
+
+Eventually we want all of us who contribute to this project to make money. We'll make it be selling support and selling development prioritization. The goal is not to build a walled garden around a cathedral, but a fusion-powered space-bazaar than can accommodate everyone.
+
+### How much of it works at this point?
+
+Eh, like 10%. See our roadmap.
